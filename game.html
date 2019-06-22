@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Automa List</h1>
+          <p class="lead text-muted">Select a game to play, or to view the automa rules!</p>
+        </div>
+      </section>
+
+        <div id="gamelist">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-3" v-for="game in games">
+              <div class="card mb-3 shadow-sm">
+                <img class="img-thumbnail" :src="game.cover" width="100%" :alt="game.title">
+                <div class="card-body">
+                  <p class="card-text">{{ game.title }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a :href="game.rules"><button type="button" class="btn btn-sm btn-outline-secondary">Rules</button></a>
+                      <a :href="game.url"><button type="button" class="btn btn-sm btn-primary">Play!</button></a>
+                    </div>
+                    <!-- <small class="text-muted">Comments</small> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<script>
+var gamelist  = new Vue({
+  el: "#gamelist",
+  data: {
+    games: [
+      {
+        title: 'Great Western Trail',
+        cover: 'games/GreatWesternTrail/img/cover.jpg',
+        rules: 'index.html',
+        url: 'index.html',
+      },
+      {
+        title: 'Mombasa',
+        cover: 'games/Mombasa/img/cover.jpg',
+        rules: 'index.html',
+        url: 'index.html',
+      },
+      {
+        title: 'Brass Lancashire',
+        cover: 'games/BrassLancashire/img/cover.jpg',
+        rules: 'index.html',
+        url: 'index.html',
+      },
+      {
+        title: 'Trajan',
+        cover: 'games/Trajan/img/cover.png',
+        rules: 'index.html',
+        url: 'index.html',
+      },
+      // {
+      //   title: 'nOVOjOGO',
+      //   cover: 'games/Trajan/img/cover.png',
+      //   rules: 'index.html',
+      //   url: 'index.html',
+      // },
+    ]
+  }
+})
+</script>
+
+
+
+    </main>
+
+
+    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <script>
+      window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+      ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async></script>
+
+  </body>
+</html>
