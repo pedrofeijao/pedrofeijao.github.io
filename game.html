@@ -7,8 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/extra.css">
 
-    <title>Hello, world!</title>
+    <title>Game Title</title>
   </head>
   <body>
     <!-- Optional JavaScript -->
@@ -17,81 +18,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-
+    <script src="js/model.js"></script>
 
     <main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Automa List</h1>
-          <p class="lead text-muted">Select a game to play, or to view the automa rules!</p>
+      <div class="container">
+        <h1 id="game-title">Nuno's game</h1>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="alert alert-primary" role="alert">
+          <b>Round <span id="round-n">0</span></b>
+          </div>
         </div>
-      </section>
+      </div>
+    </div>
 
-        <div id="gamelist">
-        <div class="container">
+    <div id="deck-area" class="container">
 
-          <div class="row">
-            <div class="col-md-3" v-for="game in games">
-              <div class="card mb-3 shadow-sm">
-                <img class="img-thumbnail" :src="game.cover" width="100%" :alt="game.title">
-                <div class="card-body">
-                  <p class="card-text">{{ game.title }}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a :href="game.rules"><button type="button" class="btn btn-sm btn-outline-secondary">Rules</button></a>
-                      <a :href="game.url"><button type="button" class="btn btn-sm btn-primary">Play!</button></a>
-                    </div>
-                    <!-- <small class="text-muted">Comments</small> -->
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 rot270">
+            <img id="deck" class="img-thumbnail" src="games/GreatWesternTrail/cards/back.png" width="100%">
           </div>
         </div>
       </div>
 
-<script>
-var gamelist  = new Vue({
-  el: "#gamelist",
-  data: {
-    games: [
-      {
-        title: 'Great Western Trail',
-        cover: 'games/GreatWesternTrail/img/cover.jpg',
-        rules: 'index.html',
-        url: 'index.html',
-      },
-      {
-        title: 'Mombasa',
-        cover: 'games/Mombasa/img/cover.jpg',
-        rules: 'index.html',
-        url: 'index.html',
-      },
-      {
-        title: 'Brass Lancashire',
-        cover: 'games/BrassLancashire/img/cover.jpg',
-        rules: 'index.html',
-        url: 'index.html',
-      },
-      {
-        title: 'Trajan',
-        cover: 'games/Trajan/img/cover.png',
-        rules: 'index.html',
-        url: 'index.html',
-      },
-      // {
-      //   title: 'nOVOjOGO',
-      //   cover: 'games/Trajan/img/cover.png',
-      //   rules: 'index.html',
-      //   url: 'index.html',
-      // },
-    ]
-  }
-})
-</script>
+        <div class="row">
+          <!-- <div class="btn-group"> -->
+            <button id="card-draw" type="button" class="btn btn-primary">Draw</button>
+            <button id="game-restart" type="button" class="btn btn-danger">Restart</button>
+          <!-- </div> -->
+        </div>
 
+<!-- Game script -->
+<script>
+
+// Init deck:
+var current_round = 0;
+var deck = [];
+var current_card = -1;
+for (var i=1; i <= 15; i++ ) {
+    deck.push(new Card("games/GreatWesternTrail/cards/"+i+".png"));
+}
+deck.shuffle()
+// Clicks:
+jQuery(document).ready(function($){
+$('#card-draw').on({
+     'click': function(){
+       current_round += 1;
+       current_card = draw_card(current_card, deck, "#deck");
+       update_round(current_round, "#round-n");
+     }
+ });
+});
+</script>
 
 
     </main>
